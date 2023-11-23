@@ -4,6 +4,7 @@
 * and can simulate spreading a sickness
 * */
 public class Pop {
+    private int id;
     private double cord_x;
     private double cord_y;
     private Vector2D direction;
@@ -20,11 +21,11 @@ public class Pop {
         this.cord_y = y;
         this.speed = speed;
         this.direction = direction;
-        this.calculateDirection(direction, speed);
+        this.calculateMovement(direction, speed);
     }
 
-
-    public void calculateDirection(Vector2D direction, double speed) {
+//  calculates the movement vector using direction and speed
+    public void calculateMovement(Vector2D direction, double speed) {
         double ratioX, ratioY;
         if(direction.getComponents()[0] > direction.getComponents()[1]) {
            ratioX = direction.getComponents()[1] / direction.getComponents()[0];
@@ -41,10 +42,23 @@ public class Pop {
 
         this.movement = new Vector2D(speed * ratioX,speed * ratioY);
     }
+//  uses the movement vector to change the current position of the pop
     public void move() {
-        this.cord_x += this.movement.getComponents()[0];
-        this.cord_y += this.movement.getComponents()[1];
+        this.cord_x += (this.movement.getComponents()[0] / 24.0);
+        this.cord_y += (this.movement.getComponents()[1] / 24.0);
     }
+
+//  determines if the current instance should keep going or change it's movement characteristics
+    public void movementChangeTest(int chance) {
+/*       TODO test if an instance should change it's or movement (may change both at the same time) then
+          change it to a new random value
+*/
+    }
+//  when the instance arrives at the area border it tests if it should leave or stay in the area
+    public void borderCrossingTest() {
+//        TODO test if the object should stay or leave
+    }
+
 
 //Getters and setters
     public void setCord_x(double cord_x) {
@@ -57,12 +71,16 @@ public class Pop {
 
     public void setDirect(Vector2D direct) {
         this.direction = direct;
-        calculateDirection(this.direction, this.speed);
+        calculateMovement(this.direction, this.speed);
     }
 
     public void setSpeed(double speed) {
         this.speed = speed;
-        calculateDirection(this.direction, this.speed);
+        calculateMovement(this.direction, this.speed);
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getCord_x() {
@@ -83,5 +101,9 @@ public class Pop {
 
     public Vector2D getMovement() {
         return movement;
+    }
+
+    public int getId() {
+        return id;
     }
 }
