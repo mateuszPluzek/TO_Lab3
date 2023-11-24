@@ -12,11 +12,11 @@ public class Pop {
     private double speed;
 
     public Pop(Board board) {
-        this.cord_x = RandomDouble.generate(0.0, board.getWidth());
-        this.cord_y = RandomDouble.generate(0.0, board.getHeight());
+        this.cord_x = RandomNumber.generate(0.0, board.getWidth(), false);
+        this.cord_y = RandomNumber.generate(0.0, board.getHeight(), false);
 
-        this.speed = RandomDouble.generate(0.0, 2.5);
-        this.direction = new Vector2D(RandomDouble.generate(0.0,10.0), RandomDouble.generate(0.0,10.0));
+        this.speed = RandomNumber.generate(0.0, 200, false);
+        this.direction = new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true));
         this.calculateMovement(this.direction, this.speed);
     }
 
@@ -31,36 +31,37 @@ public class Pop {
 //  calculates the movement vector using direction and speed
     public void calculateMovement(Vector2D direction, double speed) {
         double ratioX, ratioY;
-        if(direction.getComponents()[0] > direction.getComponents()[1]) {
-           ratioX = direction.getComponents()[1] / direction.getComponents()[0];
-           ratioY = 1.0 - ratioX;
-        }
-        else if(direction.getComponents()[0] < direction.getComponents()[1]) {
-            ratioY = direction.getComponents()[0] / direction.getComponents()[1];
-            ratioX = 1.0 - ratioY;
-        }
-        else {
-            ratioX = 0.5;
-            ratioY = 0.5;
-        }
+        ratioX = Math.abs(direction.getComponents()[0]) / (Math.abs(direction.getComponents()[0]) + Math.abs(direction.getComponents()[1]));
+        ratioY = Math.abs(direction.getComponents()[1]) / (Math.abs(direction.getComponents()[0]) + Math.abs(direction.getComponents()[1]));
+        this.movement = new Vector2D();
 
-        this.movement = new Vector2D(speed * ratioX,speed * ratioY);
+        if(direction.getComponents()[0] < 0.0)
+            this.movement.setX(speed * ratioX * -1);
+        else
+            this.movement.setX(speed * ratioX);
+
+        if(direction.getComponents()[1] < 0.0)
+            this.movement.setY(speed * ratioY * -1);
+        else
+            this.movement.setY(speed * ratioY);
     }
 //  uses the movement vector to change the current position of the pop
     public void move() {
-        this.cord_x += (this.movement.getComponents()[0] / 24.0);
-        this.cord_y += (this.movement.getComponents()[1] / 24.0);
+        this.cord_x += (this.movement.getComponents()[0] / 25.0);
+        this.cord_y += (this.movement.getComponents()[1] / 25.0);
     }
 
 //  determines if the current instance should keep going or change it's movement characteristics
     public void movementChangeTest(int chance) {
-/*       TODO test if an instance should change it's or movement (may change both at the same time) then
-          change it to a new random value
-*/
+        int test = RandomNumber.generate(0, 1000);
+        if(test <= chance) {
+            this.setSpeed(RandomNumber.generate(0.0, 200, false));
+            this.setDirect(new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true)));
+        }
     }
 //  when the instance arrives at the area border it tests if it should leave or stay in the area
-    public void borderCrossingTest() {
-//        TODO test if the object should stay or leave
+    public boolean borderCrossingTest(Board board) {
+        return this.cord_x <= 0.0 || this.cord_x >= board.getWidth() || this.cord_y <= 0.0 || this.cord_y >= board.getHeight();
     }
 
 

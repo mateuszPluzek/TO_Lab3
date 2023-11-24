@@ -33,5 +33,6 @@ public class Simulation {
 
     public void advanceOneStep() {
         this.population.movePopulation();
+        this.population.borderCrossingPopulationTest(this.board);
     }
 }

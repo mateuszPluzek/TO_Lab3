@@ -8,7 +8,7 @@ public class Main {
 
         Simulation scene = new Simulation("test", 400, 400, 0, 10);
 
-        scene.run(25, 15);
+        scene.run(25, 20);
 
     }
 }
