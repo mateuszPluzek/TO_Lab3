@@ -4,7 +4,6 @@
 * and can simulate spreading a sickness
 * */
 public class Pop {
-    private int id;
     private double cord_x;
     private double cord_y;
     private Vector2D direction;
@@ -12,8 +11,13 @@ public class Pop {
 //    speed is represented in m/s
     private double speed;
 
-    public Pop(double window_h, double window_w) {
-//           TODO set random values
+    public Pop(Board board) {
+        this.cord_x = RandomDouble.generate(0.0, board.getWidth());
+        this.cord_y = RandomDouble.generate(0.0, board.getHeight());
+
+        this.speed = RandomDouble.generate(0.0, 2.5);
+        this.direction = new Vector2D(RandomDouble.generate(0.0,10.0), RandomDouble.generate(0.0,10.0));
+        this.calculateMovement(this.direction, this.speed);
     }
 
     public Pop(double x, double y, Vector2D direction, double speed) {
@@ -79,10 +83,6 @@ public class Pop {
         calculateMovement(this.direction, this.speed);
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public double getCord_x() {
         return cord_x;
     }
@@ -103,7 +103,4 @@ public class Pop {
         return movement;
     }
 
-    public int getId() {
-        return id;
-    }
 }

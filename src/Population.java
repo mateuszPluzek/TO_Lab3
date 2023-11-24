@@ -2,34 +2,26 @@ import java.util.ArrayList;
 
 public class Population {
     private ArrayList<Pop> population;
-    String name;
 
-    public Population(String name) {
+    public Population() {
         this.population = new ArrayList<>();
-        this.name = name;
     }
 
-    public Population(ArrayList<Pop> population, String name) {
+    public Population(ArrayList<Pop> population) {
         this.population = population;
-        this.name = name;
     }
 
-    public void createRandomPopulation(int size) {
-//        TODO method that creates size amount of pop instances and puts them in the array
+    public Population(int size, Board board) {
+        this.population = new ArrayList<>();
+        for(int i = 0; i < size;i++) {
+            this.population.add(new Pop(board));
+        }
     }
 
     public void movePopulation() {
         for (Pop p : this.population) {
             p.move();
         }
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void add(Pop newPop) {
