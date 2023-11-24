@@ -39,4 +39,8 @@ public class Population {
     public void remove(int index) {
         this.population.remove(index);
     }
+
+    public ArrayList<Pop> getPopulation() {
+        return population;
+    }
 }
