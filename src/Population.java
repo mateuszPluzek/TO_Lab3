@@ -39,6 +39,24 @@ public class Population {
         }
     }
 
+    public void tryToInsertNewPop(int chance, Board board) {
+//        TODO new Pop has to move in the opposite direction of the border
+        int test = RandomNumber.generate(0, 1000);
+        if(test <= chance) {
+            double x, y;
+            boolean topOrBot = RandomNumber.generate();
+            if(topOrBot) {
+                x = RandomNumber.generate(0, board.getWidth());
+                y = RandomNumber.generate() ? 0 : board.getHeight();
+            }
+            else {
+                x = RandomNumber.generate() ? 0 : board.getWidth();
+                y = RandomNumber.generate(0, board.getHeight());
+            }
+            this.population.add(new Pop(board, x + 2.0, y + 2.0));
+        }
+    }
+
 
     public void add(Pop newPop) {
         this.population.add(newPop);

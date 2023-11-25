@@ -13,4 +13,9 @@ public class RandomNumber {
         Random random = new Random();
         return random.nextInt(max - min + 1) + min;
     }
+
+    public static boolean generate() {
+        Random random = new Random();
+        return random.nextBoolean();
+    }
 }

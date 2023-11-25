@@ -18,6 +18,8 @@ public class Simulation {
             advanceOneStep();
             window.frame.repaint();
 
+            System.out.println(this.population.getPopulation().size());
+
             try {
                 Thread.sleep(1000 / stepsPerSecond);
             } catch (InterruptedException e) {
@@ -34,5 +36,6 @@ public class Simulation {
     public void advanceOneStep() {
         this.population.movePopulation();
         this.population.borderCrossingPopulationTest(this.board);
+        this.population.tryToInsertNewPop(50, this.board);
     }
 }

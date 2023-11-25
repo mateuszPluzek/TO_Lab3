@@ -2,6 +2,8 @@
 public class Main {
 
     public static void main(String[] args) {
+//        TODO spread disease
+
 //      constant values representing the framerate
 //        int stepsPerSecond = 25;
 //        int sleepTime = 1000 / stepsPerSecond;

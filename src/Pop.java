@@ -20,6 +20,15 @@ public class Pop {
         this.calculateMovement(this.direction, this.speed);
     }
 
+    public Pop(Board board, double x, double y) {
+        this.cord_x = x;
+        this.cord_y = y;
+
+        this.speed = RandomNumber.generate(0.0, 200, false);
+        this.direction = new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true));
+        this.calculateMovement(this.direction, this.speed);
+    }
+
     public Pop(double x, double y, Vector2D direction, double speed) {
         this.cord_x = x;
         this.cord_y = y;
