@@ -11,7 +11,7 @@ public class Main {
 
 //        1 meter == 10 pixels
 
-        Simulation scene = new Simulation("test", 750, 750, 0, 200);
+        Simulation scene = new Simulation("test", 650, 650, 0, 150);
 
         scene.run(25);
 

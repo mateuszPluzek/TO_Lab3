@@ -72,7 +72,7 @@ public class Population {
     public void goThroughIllnesses() {
         for (Pop p : this.population) {
             if(!(p.getState() instanceof Healthy))
-                p.getState().progressSickness(p);
+                p.getState().progressSickness(null);
             else {
                 Pop closestSick = DistanceFinder.findClosestSickPop(p, this);
                 if(closestSick != null && DistanceFinder.distanceBetweenPops(p, closestSick) <= 20.0) {
