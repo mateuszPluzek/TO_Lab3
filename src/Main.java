@@ -13,7 +13,7 @@ public class Main {
 
         Simulation scene = new Simulation("test", 750, 750, 0, 200);
 
-        scene.run(25, 600);
+        scene.run(25);
 
     }
 }

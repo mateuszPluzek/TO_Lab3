@@ -1,7 +1,11 @@
+import java.util.Scanner;
+
 public class Simulation {
     private Window window;
     private Board board;
     private Population population;
+
+    private volatile boolean isRunning = true;
 
     public Simulation(String name, int width, int height, int padding, int startingPopSize) {
         this.board = new Board(width, height, padding);
@@ -11,25 +15,22 @@ public class Simulation {
         this.window.frame.add(new printPops(this.population.getPopulation(), this.board));
     }
 
-    public void run(int stepsPerSecond, int simulationTime) {
+    public void run(int stepsPerSecond) {
         int iterator = 0;
 
-        while (true) {
+        while (this.isRunning) {
             advanceOneStep();
             window.frame.repaint();
 
-            System.out.println(this.population.getPopulation().size());
+//            System.out.println(this.population.getPopulation().size());
 
             try {
                 Thread.sleep(1000 / stepsPerSecond);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //exit condition
+            //can calculate run time using this variable
             iterator++;
-            if(iterator >= simulationTime * stepsPerSecond) {
-                break;
-            }
         }
     }
 
