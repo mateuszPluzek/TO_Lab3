@@ -2,15 +2,18 @@
 public class Main {
 
     public static void main(String[] args) {
-//        TODO spread disease
+//        TODO memento mori
 
 //      constant values representing the framerate
 //        int stepsPerSecond = 25;
 //        int sleepTime = 1000 / stepsPerSecond;
 
-        Simulation scene = new Simulation("test", 400, 400, 0, 10);
 
-        scene.run(25, 20);
+//        1 meter == 10 pixels
+
+        Simulation scene = new Simulation("test", 750, 750, 0, 200);
+
+        scene.run(25, 600);
 
     }
 }

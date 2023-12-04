@@ -11,30 +11,32 @@ public class Pop {
 //    speed is represented in m/s
     private double speed;
 
+    private State state;
+
     public Pop(Board board) {
         this.cord_x = RandomNumber.generate(0.0, board.getWidth(), false);
         this.cord_y = RandomNumber.generate(0.0, board.getHeight(), false);
 
-        this.speed = RandomNumber.generate(0.0, 200, false);
-        this.direction = new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true));
+        this.speed = RandomNumber.generate(0.0, 25.0, false);
+        this.direction = new Vector2D(RandomNumber.generate(0.0,5.0, true), RandomNumber.generate(0.0,5.0, true));
         this.calculateMovement(this.direction, this.speed);
+
+        this.state = new Healthy(this);
     }
 
-    public Pop(Board board, double x, double y) {
-        this.cord_x = x;
-        this.cord_y = y;
-
-        this.speed = RandomNumber.generate(0.0, 200, false);
-        this.direction = new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true));
-        this.calculateMovement(this.direction, this.speed);
-    }
-
-    public Pop(double x, double y, Vector2D direction, double speed) {
+    public Pop(Board board, double x, double y, Vector2D direction, double speed, int chance) {
         this.cord_x = x;
         this.cord_y = y;
         this.speed = speed;
         this.direction = direction;
         this.calculateMovement(direction, speed);
+        if(RandomNumber.generate(0, 100) < chance)
+            if(RandomNumber.generate(0, 10) < 5)
+                this.state = new SickNoSymptoms(this);
+            else
+                this.state = new SickWithSymptoms(this);
+        else
+            this.state = new Healthy(this);
     }
 
 //  calculates the movement vector using direction and speed
@@ -64,14 +66,16 @@ public class Pop {
     public void movementChangeTest(int chance) {
         int test = RandomNumber.generate(0, 1000);
         if(test <= chance) {
-            this.setSpeed(RandomNumber.generate(0.0, 200, false));
-            this.setDirect(new Vector2D(RandomNumber.generate(0.0,10.0, true), RandomNumber.generate(0.0,10.0, true)));
+            this.setSpeed(RandomNumber.generate(0.0, 25.0, false));
+            this.setDirect(new Vector2D(RandomNumber.generate(0.0,5.0, true), RandomNumber.generate(0.0,5.0, true)));
         }
     }
 //  when the instance arrives at the area border it tests if it should leave or stay in the area
     public boolean borderCrossingTest(Board board) {
         return this.cord_x <= 0.0 || this.cord_x >= board.getWidth() || this.cord_y <= 0.0 || this.cord_y >= board.getHeight();
     }
+
+//    TODO search closest person and if sick you know what
 
 
 //Getters and setters
@@ -93,6 +97,10 @@ public class Pop {
         calculateMovement(this.direction, this.speed);
     }
 
+    public void changeState(State state) {
+        this.state = state;
+    }
+
     public double getCord_x() {
         return cord_x;
     }
@@ -111,6 +119,10 @@ public class Pop {
 
     public Vector2D getMovement() {
         return movement;
+    }
+
+    public State getState() {
+        return this.state;
     }
 
 }

@@ -21,7 +21,16 @@ public class printPops extends JPanel {
             int centerY = (int) p.getCord_y();
             int radius = 5;
 
-            g.setColor(Color.BLUE);
+            if(p.getState() instanceof Immune)
+                g.setColor(Color.CYAN);
+            else if(p.getState() instanceof Healthy)
+                g.setColor(Color.BLUE);
+            else if(p.getState() instanceof SickNoSymptoms)
+                g.setColor(Color.GREEN);
+            else if(p.getState() instanceof SickWithSymptoms)
+                g.setColor(Color.YELLOW);
+
+
             g.fillOval(centerX - radius, centerY - radius, 2 * radius, 2 * radius);
         }
         g.setColor(Color.BLACK);
