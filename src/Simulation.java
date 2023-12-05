@@ -108,7 +108,7 @@ public class Simulation implements Serializable{
             this.window.frame.getContentPane().remove(1);
             this.window.frame.add(new printPops(this.population.getPopulation(), this.board));
             this.window.frame.setVisible(true);
-            this.window.frame.repaint();
+//            this.window.frame.repaint();
 
         } catch (ClassNotFoundException e) {
             System.out.println("class not found");

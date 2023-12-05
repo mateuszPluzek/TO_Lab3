@@ -37,9 +37,10 @@ public class Window implements Serializable {
 //        attaching the buttons and list to the main window
         frame.add(buttonPannel, BorderLayout.EAST);
 
-        for(int i = 0;i < sim.getHistory().getSavedHistory().size(); i++) {
-            loadListModel.addElement(String.valueOf(i));
-        }
+//        USELESS CODE, HISTORY WILL BE ALWAYS EMPTY
+//        for(int i = 0;i < sim.getHistory().getSavedHistory().size(); i++) {
+//            loadListModel.addElement("     " + String.valueOf(i) + "     ");
+//        }
 
         //action to take after pressing start button
         startButton.addActionListener(new ActionListener() {
@@ -62,7 +63,7 @@ public class Window implements Serializable {
                 sim.getHistory().takeMemento(new Memento(sim));
                 loadListModel.clear();
                 for(int i = 0;i < sim.getHistory().getSavedHistory().size(); i++) {
-                    loadListModel.addElement(String.valueOf(i));
+                    loadListModel.addElement("          " + String.valueOf(i) + "          ");
                 }
             }
         });
@@ -70,7 +71,7 @@ public class Window implements Serializable {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sim.getHistory().loadHistory(Integer.parseInt(loadList.getSelectedValue())).restore();
+                sim.getHistory().loadHistory(Integer.parseInt(loadList.getSelectedValue().strip())).restore();
             }
         });
 
