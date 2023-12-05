@@ -1,8 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class printPops extends JPanel {
+public class printPops extends JPanel implements Serializable {
 
     private ArrayList<Pop> pops;
     private Board board;

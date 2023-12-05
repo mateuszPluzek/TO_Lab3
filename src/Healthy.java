@@ -1,4 +1,6 @@
-public class Healthy extends State {
+import java.io.Serializable;
+
+public class Healthy extends State{
 
     private int timeNearSick = 0;
 

@@ -1,4 +1,6 @@
-public abstract class State {
+import java.io.Serializable;
+
+public abstract class State implements Serializable {
     protected Pop pop;
     public State(Pop pop) {
         this.pop = pop;

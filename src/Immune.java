@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Immune extends State{
     public Immune(Pop pop) {
         super(pop);

@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /*
 * class meant to represent a population  individual who
 * can move in random directions inside set boundaries
 * and can simulate spreading a sickness
 * */
-public class Pop {
+public class Pop implements Serializable {
     private double cord_x;
     private double cord_y;
     private Vector2D direction;

@@ -2,7 +2,6 @@
 public class Main {
 
     public static void main(String[] args) {
-//        TODO memento mori
 
 //      constant values representing the framerate
 //        int stepsPerSecond = 25;
@@ -13,7 +12,7 @@ public class Main {
 
         Simulation scene = new Simulation("test", 650, 650, 0, 200);
 
-        scene.run(25);
+        scene.run();
 
     }
 }

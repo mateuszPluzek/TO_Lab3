@@ -1,4 +1,6 @@
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
     private int width;
     private int height;
 

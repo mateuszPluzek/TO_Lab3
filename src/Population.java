@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Population {
+public class Population implements Serializable {
     private ArrayList<Pop> population;
 
     public Population() {

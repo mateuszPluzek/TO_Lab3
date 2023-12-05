@@ -1,4 +1,6 @@
-public class Vector2D implements IVector {
+import java.io.Serializable;
+
+public class Vector2D implements IVector, Serializable {
     private double x;
     private double y;
     // Default constructor
