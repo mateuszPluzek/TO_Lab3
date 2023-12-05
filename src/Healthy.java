@@ -21,13 +21,13 @@ public class Healthy extends State {
                 if (RandomNumber.generate(0, 10) < 5)
                     this.pop.changeState(new SickNoSymptoms(this.pop));
                 else
-                    this.pop.changeState(new SickNoSymptoms(this.pop));
+                    this.pop.changeState(new SickWithSymptoms(this.pop));
             } else if (p.getState() instanceof SickNoSymptoms) {
                 if (RandomNumber.generate(0, 10) < 5) {
                     if (RandomNumber.generate(0, 10) < 5)
                         this.pop.changeState(new SickNoSymptoms(this.pop));
                     else
-                        this.pop.changeState(new SickNoSymptoms(this.pop));
+                        this.pop.changeState(new SickWithSymptoms(this.pop));
                 }
             }
         }

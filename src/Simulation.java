@@ -14,6 +14,17 @@ public class Simulation {
 
         this.window.frame.add(new printPops(this.population.getPopulation(), this.board));
     }
+    //constructor for case if there are immune people in starting population
+    public Simulation(String name, int width, int height, int padding, int startingPopSize, int immuneSize) {
+        this.board = new Board(width, height, padding);
+        this.window = new Window(name, this.board.getWidth(), this.board.getHeight());
+        this.population = new Population(startingPopSize, this.board);
+        for(int i = 0; i < immuneSize; i++) {
+            this.population.get(i).changeState(new Immune(this.population.get(i)));
+        }
+
+        this.window.frame.add(new printPops(this.population.getPopulation(), this.board));
+    }
 
     public void run(int stepsPerSecond) {
         int iterator = 0;
@@ -58,10 +69,14 @@ public class Simulation {
         }
     }
 
-    public void advanceOneStep() {
+    private void advanceOneStep() {
         this.population.movePopulation();
         this.population.borderCrossingPopulationTest(this.board);
-        this.population.tryToInsertNewPop(50, this.board, 10);
+        this.population.tryToInsertNewPop(60, this.board, 10);
         this.population.goThroughIllnesses();
     }
+
+
+
+
 }
